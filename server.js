@@ -15,7 +15,8 @@ app.use(cors());
 app.use(express.json());
 config();
 const port = process.env.PORT || 8080;
-connect();
+
+// connect();
 
 app.use('/api', router)//api
 app.get('/', (req, res) => {
@@ -26,22 +27,21 @@ app.get('/', (req, res) => {
         res.json(error)
     }
 })
-
-app.listen(port, () => {
-    console.log(`Server connected to http://localhost:${port}`)
-})
-
-
-// connect().then(() => {
-//     try {
-//         app.listen(port, () => {
-//             console.log(`Server connected to http://localhost:${port}`)
-//         })
-//     }
-//     catch (error) {
-//         console.log("Cannot connect to the server");
-//     }
-
-// }).catch(error => {
-//     console.log("Invalid Database Connection");
+// app.listen(port, () => {
+//     console.log(`Server connected to http://localhost:${port}`)
 // })
+
+
+connect().then(() => {
+    try {
+        app.listen(port, () => {
+            console.log(`Server connected to http://localhost:${port}`)
+        })
+    }
+    catch (error) {
+        console.log("Cannot connect to the server");
+    }
+
+}).catch(error => {
+    console.log("Invalid Database Connection");
+})
